@@ -174,15 +174,40 @@
       display: none; align-items: center; justify-content: center; padding: 18px; z-index: 90;
     }
     .crm-modal-backdrop.open { display: flex; }
+    .crm-hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: stretch; }
     @media (max-width: 900px) {
-      .crm-layout { grid-template-columns: 1fr; }
+      .crm-layout, .crm-hero-grid { grid-template-columns: 1fr; gap: 16px; }
       .route-nodes-bar, .grid-5 { grid-template-columns: repeat(2, 1fr); }
       .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 12px; }
       .grid-4 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       th, td { padding: 8px 9px; font-size: 12px; }
-      .bottombar { flex-wrap: wrap; }
+      .bottombar { flex-wrap: wrap; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); }
       .nav-tabs { order: 1; width: 100%; }
       .bottombar > .btn { order: 2; flex: 1; }
+    }
+    @media (max-width: 540px) {
+      .topbar {
+        padding: calc(6px + env(safe-area-inset-top)) 12px 8px;
+        min-height: 48px;
+        gap: 6px;
+      }
+      .brand { font-size: 11.5px; gap: 6px; max-width: 58%; line-height: 1.2; }
+      .topbar .mode-btn:nth-child(2) { display: none; }
+      .mode-btn { font-size: 11px; padding: 6px 10px; white-space: nowrap; }
+      main { padding: 16px 12px calc(82px + env(safe-area-inset-bottom)); }
+      .slide { padding-bottom: 24px; margin-bottom: 24px; }
+      .slide-title { font-size: 22px; line-height: 1.18; }
+      .slide-sub { font-size: 13.5px; margin-bottom: 14px; }
+      .grid-4 { grid-template-columns: 1fr; gap: 10px; }
+      .card { padding: 14px; border-radius: 13px; }
+      .big-num { font-size: 24px; }
+      table { min-width: 540px; }
+      .map-box { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 10px; }
+      .map-svg { min-width: 660px; }
+      .pill-row > .tab-btn { flex: 1 1 100%; min-height: 44px; font-size: 13.5px; padding: 10px 14px; }
+      #cleanCrmActionBtn { width: 100%; }
+      body:not(.deck-mode) .bottombar > .btn { display: none; }
+      .tab-btn { min-height: 40px; padding: 8px 13px; font-size: 13px; }
     }
     @media print {
       @page { size: 297mm 210mm; margin: 8mm 10mm; }
@@ -659,9 +684,9 @@
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
             <span class="card-title" style="color:var(--amber); margin:0;">Калькулятор графика движения рефа (под утренний торг 04:00–05:00)</span>
           </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;">
+          <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;">
             <span style="font-size:12.5px; color:var(--muted);">Время выезда с рампы Софийской, 151: <strong id="depTimeLabel" style="color:var(--lime);">19:30 вечера</strong></span>
-            <input type="range" id="depHourRange" min="16" max="23" step="0.5" value="19.5" oninput="recalcEta()" style="width:180px; margin:0;" />
+            <input type="range" id="depHourRange" min="16" max="23" step="0.5" value="19.5" oninput="recalcEta()" style="flex:1; min-width:160px; max-width:240px; margin:0;" />
           </div>
           <div class="grid-4" style="gap:8px;">
             <div style="background:var(--surface-alt); padding:8px 10px; border-radius:8px;">
@@ -1095,7 +1120,7 @@
 
       <!-- БЛОК 2: ОСНОВНОЙ ДАШБОРД + МАКЕТ ЭКРАНА СМАРТФОНА -->
       <div class="card card-amber" style="padding:24px;">
-        <div style="display:grid; grid-template-columns: 2fr 1fr; gap: 20px; align-items: stretch;">
+        <div class="crm-hero-grid">
           <!-- ЛЕВАЯ ЧАСТЬ: ЗАГОЛОВОК + 3 КРУПНЫЕ КАРТОЧКИ ПОКАЗАТЕЛЕЙ -->
           <div style="display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
             <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
